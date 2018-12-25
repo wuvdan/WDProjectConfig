@@ -1,5 +1,5 @@
 ### WDProjectConfig
-提供了常用的宏定义，TableView的UIViewController类别、UIView代替UINavigationBar的WDNavigationBar的UIViewController类别、UIImage类别，UIFont适配类别，简单的AFNetworking的二次封装配合SVProgressHUD的Loding
+提供了常用的宏定义，TableView的UIViewController类别、UIView代替UINavigationBar的WDNavigationBar的UIViewController类别、UIImage类别，UIFont适配类别，简单的AFNetworking的二次封装配合SVProgressHUD的Loding，UITableView/UICollectionView空数据页面。
 #### 宏定义
 所有的宏定义都是k开头，为了和自己项目的区分开，可以设置其他字符开头。
 ```
@@ -145,6 +145,12 @@ self.navigationBar.centerButtonBlock = ^{
 ```
 #### WDNetWorkingManager
 提供了简单的Post/Get/DELETE/PUT/PATCH 单图上传和多图上传。
+
+#### UIScrollView (WDNoData)
+网络请求加载数据时，当数据为空时显示的页面配置。默认显示空数据页面大小为ScrollView的大小
+```
+self.tableView.noDataView = [[UIView alloc] init];
+```
 
 #### UIImage (WDExtra)/UIFont (WDExtra)
 使用可以看源码
