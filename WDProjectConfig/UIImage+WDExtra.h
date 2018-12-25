@@ -13,16 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImage (WDExtra)
 
 /** 设置图片的读取模式 */
-+ (UIImage *)wd_initWithName:(NSString *)name renderingMode:(UIImageRenderingMode)mode;
++ (nullable UIImage *)wd_initWithName:(NSString *)name renderingMode:(UIImageRenderingMode)mode;
 
 /** 用颜色返回一张图片 */
 + (nullable UIImage *)wd_imageWithColor:(UIColor *)color;
 
 /** 用颜色返回指定尺寸的一张图片 */
-+ (UIImage *)wd_imageWithColor:(UIColor *)color size:(CGSize)size;
++ (nullable UIImage *)wd_imageWithColor:(UIColor *)color size:(CGSize)size;
 
 /** 设置圆角 */
-- (UIImage *)wd_imageAddCornerWithRadius:(CGFloat)radius andSize:(CGSize)size;
+- (nullable UIImage *)wd_imageAddCornerWithRadius:(CGFloat)radius andSize:(CGSize)size;
 
 @end
 
