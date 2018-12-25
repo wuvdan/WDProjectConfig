@@ -11,14 +11,24 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WDNavgationBar : UIView
-
+/** 是否显示底部showImage */
 @property (nonatomic, assign) BOOL isShowBottomLine;
+/** 底部showImage */
+@property (nonatomic, strong) UIView *showImage;
+/** 返回按钮-左边按钮 */
 @property (nonatomic, strong) UIButton *leftButton;
+/** 左边第二个按钮 */
 @property (nonatomic, strong) UIButton *leftSecondButton;
+/** 中间标题按钮 */
 @property (nonatomic, strong) UIButton *centerButton;
+/** 右边按钮 */
 @property (nonatomic, strong) UIButton *rightButton;
+/** 右边第二个按钮 */
 @property (nonatomic, strong) UIButton *rightSecondButton;
 
+/**
+   按钮点击事件
+ */
 @property (nonatomic, copy) void (^ leftButtonBlock)(void);
 @property (nonatomic, copy) void (^ leftSecondButtonBlock)(void);
 @property (nonatomic, copy) void (^ centerButtonBlock)(void);

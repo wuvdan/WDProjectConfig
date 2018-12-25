@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 
 @interface NSObject (WDExtra)
-//类方法
+// 交换类方法
 + (BOOL)swizzleClassMethod:(SEL)originalSel with:(SEL)newSel;
 
 @end

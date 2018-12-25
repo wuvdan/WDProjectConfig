@@ -8,12 +8,6 @@
 
 #import "UIViewController+WDNavgationBar.h"
 
-@interface WDNavgationBar ()
-
-@property (nonatomic, strong) UIView *showImage;
-
-@end
-
 @implementation WDNavgationBar
 
 - (void)setIsShowBottomLine:(BOOL)isShowBottomLine {

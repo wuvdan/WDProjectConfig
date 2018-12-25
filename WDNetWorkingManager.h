@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, WDNetWorkingManagerRequestMethod) {
 + (instancetype)manager;
 
 /**
- 基础网络i请求
+ 基础网络请求
  
  @param method 请求形式POST/GET等
  @param url 服务器IP地址
