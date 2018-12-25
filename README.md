@@ -141,7 +141,7 @@ self.navigationBar.backgroundColor = UIColor.orangeColor;
 // 按钮点击事件
 self.navigationBar.centerButtonBlock = ^{
     // TODO:
-}]
+};
 ```
 #### WDNetWorkingManager
 提供了简单的Post/Get/DELETE/PUT/PATCH 单图上传和多图上传。
