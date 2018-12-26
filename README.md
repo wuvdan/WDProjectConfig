@@ -112,7 +112,7 @@ self.tableView.dataSource = self;
 self.tableView.frame = self.view.bounds;
 ```
 ### UIViewController (WDNavgationBar)
-==============
+----
 
 为了方便控制导航栏的样式和手势返回，使用UIView代替系统UINavigationBar,提供了常用的样式
 ```
