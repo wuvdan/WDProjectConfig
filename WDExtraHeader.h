@@ -15,6 +15,7 @@
 #import "UIViewController+WDTableView.h"
 #import "UIScrollView+WDNoData.h"
 #import "WDNetWorkingManager.h"
+#import "UINavigationController+WDStatusBar.h"
 
 #pragma mark - 字体、颜色相关
 #define kFONT_SIZE(f)            [UIFont systemFontOfSize:(f)]
@@ -35,7 +36,7 @@
 
 #pragma mark - 控制台打印
 #ifdef DEBUG
-#define WDLog(FORMAT, ...) fprintf(stderr,"%s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#define kLog(FORMAT, ...) fprintf(stderr,"%s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
 #else
 #define NSLog(FORMAT, ...) nil
 #endif
@@ -76,7 +77,7 @@
 
 #pragma mark - 屏幕坐标、尺寸相关
 // 判断是否iPhone X
-#define IS_iPhoneX              UIApplication.sharedApplication.statusBarFrame.size.height > 20 : YES : NO
+#define kIS_iPhoneX              UIApplication.sharedApplication.statusBarFrame.size.height > 20 : YES : NO
 // 屏幕高度
 #define kScreenHeight           [[UIScreen mainScreen] bounds].size.height
 // 屏幕宽度
@@ -108,4 +109,3 @@
 ///=============================================================================
 
 #endif /* WDExtraHeader_h */
-
