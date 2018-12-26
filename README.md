@@ -1,8 +1,7 @@
 WDProjectConfig
 -------
-提供了常用的宏定义，TableView的UIViewController类别、UIView代替UINavigationBar的WDNavigationBar的UIViewController类别、UIImage类别，UIFont适配类别，简单的AFNetworking的二次封装配合SVProgressHUD的Loding，UITableView/UICollectionView空数据页面。
-### 宏定义
--------
+提供了常用工具类、宏定义。
+# 宏定义
 
 所有的宏定义都是k开头，为了和自己项目的区分开，可以设置其他字符开头。
 ```
@@ -99,7 +98,7 @@ WDProjectConfig
 
 #endif /* WDExtraHeader_h */
 ```
-### UIViewController (WDTableView)
+UIViewController (WDTableView)
 -------
 
 默认没有添加在View中，并设置了预估高度
@@ -111,7 +110,7 @@ self.tableView.delegate = self;
 self.tableView.dataSource = self;
 self.tableView.frame = self.view.bounds;
 ```
-### UIViewController (WDNavgationBar)
+UIViewController (WDNavgationBar)
 ----
 
 为了方便控制导航栏的样式和手势返回，使用UIView代替系统UINavigationBar,提供了常用的样式
@@ -150,25 +149,33 @@ self.navigationBar.centerButtonBlock = ^{
     // TODO:
 };
 ```
-#### WDNetWorkingManager
+WDNetWorkingManager
 -------
 
 提供了简单的Post/Get/DELETE/PUT/PATCH 单图上传和多图上传。
 
-#### UIScrollView (WDNoData)
+UIScrollView (WDNoData)
 -------
 
 网络请求加载数据时，当数据为空时显示的页面配置。默认显示空数据页面大小为ScrollView的大小
 ```
 self.tableView.noDataView = [[UIView alloc] init];
 ```
+UINavigationController (WDStatusBar)
+------
+设置状态栏样式,在VC中调用
+```
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+```
 
-### UIImage (WDExtra)/UIFont (WDExtra)
+UIImage (WDExtra)/UIFont (WDExtra)
 -------
 
 使用可以看源码
 
-### 使用方法
+使用方法
 -------
 
 ```
@@ -179,7 +186,12 @@ end
 ```
 #import <WDExtraHeader.h>
 ```
-### 强行解释一波
+注意
+-------
+-  自定义导航栏还未支持Landscape模式，使用时请注意
+-  库中已自动导入最新版本AFNetworking、SVProgressHUD
+
+强行解释一波
 -------
 
 在下菜鸟一个，仅仅为了自己方便页面搭建、适配和简单的网络请求。代码还在继续更新，添加新的工具类等。如果有什么问题勿喷~😝
