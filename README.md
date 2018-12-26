@@ -173,10 +173,16 @@ UINavigationController (WDStatusBar)
 }
 ```
 
-UIImage (WDExtra)/UIFont (WDExtra)
+UIImage (WDExtra)
 -------
 
-使用可以看源码
+1、获取图片并设置读取模式
+2、用颜色设置为图片
+3、设置图片的圆角
+
+UIFont (WDExtra)
+-------
+为了在不同尺寸下显示的字体设置效果相同，使用runtime，在设置字体时，进行比例适配，无侵入。
 
 使用方法
 -------
