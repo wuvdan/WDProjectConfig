@@ -139,8 +139,11 @@ UIViewController (WDNavgationBar)
 @property (nonatomic, copy) void (^ rightButtonBlock)(void);
 @property (nonatomic, copy) void (^ rightSecondButtonBlock)(void);
 ```
-使用方法
+使用:先隐藏系统导航栏
 ```
+// 隐藏系统导航栏 使用自定义导航栏
+self.navigationController.navigationBar.hidden = true;
+// 其他配置
 [self.navigationBar.centerButton setTitle:@"首页" forState:UIControlStateNormal];
 [self.navigationBar.centerButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
 self.navigationBar.backgroundColor = UIColor.orangeColor;
