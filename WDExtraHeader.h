@@ -83,7 +83,7 @@
 // 屏幕宽度
 #define kScreenWidth            [[UIScreen mainScreen] bounds].size.width
 // 状态栏高度
-#define kStatusBarHeight        (IS_iPhoneX ? 44.f : 20.f)
+#define kStatusBarHeight        UIApplication.sharedApplication.statusBarFrame.size.height
 // 顶部导航栏高度
 #define kNavigationBarHeight    44.f
 // 状态栏高度 + 顶部导航栏高度
