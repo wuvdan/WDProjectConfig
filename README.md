@@ -176,9 +176,9 @@ UINavigationController (WDStatusBar)
 UIImage (WDExtra)
 -------
 
-1、获取图片并设置读取模式
-2、用颜色设置为图片
-3、设置图片的圆角
+1、获取图片并设置读取模式<br>
+2、用颜色设置为图片<br>
+3、设置图片的圆角<br>
 
 UIFont (WDExtra)
 -------
