@@ -77,7 +77,7 @@
 
 #pragma mark - 屏幕坐标、尺寸相关
 // 判断是否iPhone X
-#define kIS_iPhoneX              UIApplication.sharedApplication.statusBarFrame.size.height > 20 : YES : NO
+#define kIS_iPhoneX             UIApplication.sharedApplication.statusBarFrame.size.height > 20 : YES : NO
 // 屏幕高度
 #define kScreenHeight           [[UIScreen mainScreen] bounds].size.height
 // 屏幕宽度
