@@ -47,10 +47,6 @@ WDProjectConfig
 #pragma mark - Application相关
 // APP对象 （单例对象）
 #define kApplication         [UIApplication sharedApplication]
-// APP对象
-#define kAppDelegate         (AppDelegate*)[[UIApplication sharedApplication] delegate]
-// 主窗口 （keyWindow）
-#define kKeyWindow           [UIApplication sharedApplication].keyWindow
 // NSUserDefaults实例化
 #define kUserDefaults        [NSUserDefaults standardUserDefaults]
 // 通知中心 （单例对象）
@@ -65,17 +61,17 @@ WDProjectConfig
 
 #pragma mark - 屏幕坐标、尺寸相关
 // 判断是否iPhone X
-#define kIS_iPhoneX              UIApplication.sharedApplication.statusBarFrame.size.height > 20 : YES : NO
+#define kIS_iPhoneX             (UIApplication.sharedApplication.statusBarFrame.size.height > 20)
 // 屏幕高度
 #define kScreenHeight           [[UIScreen mainScreen] bounds].size.height
 // 屏幕宽度
 #define kScreenWidth            [[UIScreen mainScreen] bounds].size.width
 // 状态栏高度
-#define kStatusBarHeight        (IS_iPhoneX ? 44.f : 20.f)
+#define kStatusBarHeight        UIApplication.sharedApplication.statusBarFrame.size.height
 // 顶部导航栏高度
 #define kNavigationBarHeight    44.f
 // 状态栏高度 + 顶部导航栏高度
-#define kSafeAreaTopHeight      UIApplication.sharedApplication.statusBarFrame.size.height + 44
+#define kSafeAreaTopHeight      (UIApplication.sharedApplication.statusBarFrame.size.height + 44)
 // 底部安全距离
 #define kSafeAreaBottomHeight   (kIS_iPhoneX ? 34.f : 0.f)
 // Tabbar高度
@@ -95,8 +91,6 @@ WDProjectConfig
 #define kWeakSelf(type)  __weak typeof(type) weak##type = type;
 #define kStrongSelf(type)  __strong typeof(type) type = weak##type;
 ///=============================================================================
-
-#endif /* WDExtraHeader_h */
 ```
 UIViewController (WDTableView)
 -------
@@ -156,6 +150,34 @@ WDNetWorkingManager
 -------
 
 提供了简单的Post/Get/DELETE/PUT/PATCH 单图上传和多图上传。
+UIView (WDExtra)
+-------
+快捷访问View的frame
+```
+/** left: frame.origin.x */
+@property (nonatomic) CGFloat left;
+/** top: frame.origin.y */
+@property (nonatomic) CGFloat top;
+/** right: frame.origin.x + frame.size.width */
+@property (nonatomic) CGFloat right;
+/** bottom: frame.origin.y + frame.size.height */
+@property (nonatomic) CGFloat bottom;
+/** width: frame.size.width */
+@property (nonatomic) CGFloat width;
+/** height: frame.size.height */
+@property (nonatomic) CGFloat height;
+/** centerX: center.x */
+@property (nonatomic) CGFloat centerX;
+/** centerY: center.y */
+@property (nonatomic) CGFloat centerY;
+/** origin: frame.origin */
+@property (nonatomic) CGPoint origin;
+/** size: frame.size */
+@property (nonatomic) CGSize  size;
+```
+
+网络请求加载数据时，当数据为空时显示的页面配置。默认显示空数据页面大小为ScrollView的大小
+```
 
 UIScrollView (WDNoData)
 -------
