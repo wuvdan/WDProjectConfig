@@ -77,7 +77,7 @@
 
 #pragma mark - 屏幕坐标、尺寸相关
 // 判断是否iPhone X
-#define kIS_iPhoneX             (UIApplication.sharedApplication.statusBarFrame.size.height > 20 : YES : NO)
+#define kIS_iPhoneX             (UIApplication.sharedApplication.statusBarFrame.size.height > 20 ? YES : NO)
 // 屏幕高度
 #define kScreenHeight           [[UIScreen mainScreen] bounds].size.height
 // 屏幕宽度
@@ -94,11 +94,11 @@
 #define kTabbarHeight           49.f
 
 // 控件尺寸比例
-#define kScreenWidthRate        ([[UIScreen mainScreen] bounds].size.width/375.f)
+#define kScreenWidthRate        ([[UIScreen mainScreen] bounds].size.width / 375.f)
 // 实际宽尺寸
 #define kSuitWidthSize(size)    kScreenWidthRate * (size)
 // 控件尺寸比例
-#define kScreenHeightRate       ([[UIScreen mainScreen] bounds].size.height/667.f)
+#define kScreenHeightRate       ([[UIScreen mainScreen] bounds].size.height / 667.f)
 // 实际高尺寸
 #define kSuitHeightSize(size)   kScreenHeightRate * (size)
 ///=============================================================================
