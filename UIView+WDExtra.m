@@ -1,110 +1,95 @@
 //
 //  UIView+WDExtra.m
-//  
+//  AFNetworking
 //
-//  Created by wudan on 2018/12/29.
+//  Created by wudan on 2019/6/1.
 //
 
 #import "UIView+WDExtra.h"
-
+#import <objc/runtime.h>
 @implementation UIView (WDExtra)
-
-/// frame 快捷访问
-- (CGFloat)left {
-    return self.frame.origin.x;
++ (Class)layerClass {
+    return [CAGradientLayer class];
 }
 
-- (void)setLeft:(CGFloat)x {
-    CGRect frame = self.frame;
-    frame.origin.x = x;
-    self.frame = frame;
++ (UIView *)wd_gradientViewWithColors:(NSArray<UIColor *> *)colors
+                            locations:(NSArray<NSNumber *> *)locations
+                           startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+    
+    UIView *view = [[self alloc] init];
+    [view wd_setGradientBackgroundWithColors:colors
+                                   locations:locations
+                                  startPoint:startPoint
+                                    endPoint:endPoint];
+    return view;
 }
 
-- (CGFloat)top {
-    return self.frame.origin.y;
+- (void)wd_setGradientBackgroundWithColors:(NSArray<UIColor *> *)colors
+                                 locations:(NSArray<NSNumber *> *)locations
+                                startPoint:(CGPoint)startPoint
+                                  endPoint:(CGPoint)endPoint {
+    NSMutableArray *colorsM = [NSMutableArray array];
+    for (UIColor *color in colors) {
+        [colorsM addObject:(__bridge id)color.CGColor];
+    }
+    self.wd_colors = [colorsM copy];
+    self.wd_locations = locations;
+    self.wd_startPoint = startPoint;
+    self.wd_endPoint = endPoint;
 }
 
-- (void)setTop:(CGFloat)y {
-    CGRect frame = self.frame;
-    frame.origin.y = y;
-    self.frame = frame;
+#pragma mark- Getter&Setter
+
+- (NSArray *)wd_colors {
+    return objc_getAssociatedObject(self, _cmd);
 }
 
-- (CGFloat)right {
-    return self.frame.origin.x + self.frame.size.width;
+- (void)setWd_colors:(NSArray *)colors {
+    objc_setAssociatedObject(self, @selector(wd_colors), colors, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    if ([self.layer isKindOfClass:[CAGradientLayer class]]) {
+        [((CAGradientLayer *)self.layer) setColors:self.wd_colors];
+    }
 }
 
-- (void)setRight:(CGFloat)right {
-    CGRect frame = self.frame;
-    frame.origin.x = right - frame.size.width;
-    self.frame = frame;
+- (NSArray<NSNumber *> *)wd_locations {
+    return objc_getAssociatedObject(self, _cmd);
 }
 
-- (CGFloat)bottom {
-    return self.frame.origin.y + self.frame.size.height;
+- (void)setWd_locations:(NSArray<NSNumber *> *)locations {
+    objc_setAssociatedObject(self, @selector(wd_locations), locations, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    if ([self.layer isKindOfClass:[CAGradientLayer class]]) {
+        [((CAGradientLayer *)self.layer) setLocations:self.wd_locations];
+    }
 }
 
-- (void)setBottom:(CGFloat)bottom {
-    CGRect frame = self.frame;
-    frame.origin.y = bottom - frame.size.height;
-    self.frame = frame;
+- (CGPoint)wd_startPoint {
+    return [objc_getAssociatedObject(self, _cmd) CGPointValue];
 }
 
-- (CGFloat)width {
-    return self.frame.size.width;
+- (void)setWd_startPoint:(CGPoint)startPoint {
+    objc_setAssociatedObject(self, @selector(wd_startPoint), [NSValue valueWithCGPoint:startPoint], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if ([self.layer isKindOfClass:[CAGradientLayer class]]) {
+        [((CAGradientLayer *)self.layer) setStartPoint:self.wd_startPoint];
+    }
 }
 
-- (void)setWidth:(CGFloat)width {
-    CGRect frame = self.frame;
-    frame.size.width = width;
-    self.frame = frame;
+- (CGPoint)wd_endPoint {
+    return [objc_getAssociatedObject(self, _cmd) CGPointValue];
 }
 
-- (CGFloat)height {
-    return self.frame.size.height;
+- (void)setWd_endPoint:(CGPoint)endPoint {
+    objc_setAssociatedObject(self, @selector(wd_endPoint), [NSValue valueWithCGPoint:endPoint], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if ([self.layer isKindOfClass:[CAGradientLayer class]]) {
+        [((CAGradientLayer *)self.layer) setEndPoint:self.wd_endPoint];
+    }
 }
 
-- (void)setHeight:(CGFloat)height {
-    CGRect frame = self.frame;
-    frame.size.height = height;
-    self.frame = frame;
-}
+@end
 
-- (CGFloat)centerX {
-    return self.center.x;
-}
+@implementation UILabel (WDGradient)
 
-- (void)setCenterX:(CGFloat)centerX {
-    self.center = CGPointMake(centerX, self.center.y);
++ (Class)layerClass {
+    return [CAGradientLayer class];
 }
-
-- (CGFloat)centerY {
-    return self.center.y;
-}
-
-- (void)setCenterY:(CGFloat)centerY {
-    self.center = CGPointMake(self.center.x, centerY);
-}
-
-- (CGPoint)origin {
-    return self.frame.origin;
-}
-
-- (void)setOrigin:(CGPoint)origin {
-    CGRect frame = self.frame;
-    frame.origin = origin;
-    self.frame = frame;
-}
-
-- (CGSize)size {
-    return self.frame.size;
-}
-
-- (void)setSize:(CGSize)size {
-    CGRect frame = self.frame;
-    frame.size = size;
-    self.frame = frame;
-}
-
 
 @end

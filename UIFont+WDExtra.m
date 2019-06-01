@@ -15,7 +15,6 @@
 
 @end
 
-
 @implementation NSObject (WDExtra)
 
 #pragma mark - 交换方法
@@ -33,10 +32,20 @@
 @implementation UIFont (WDExtra)
 
 + (void)load {
-    [self swizzleClassMethod:@selector(systemFontOfSize:) with:@selector(wd_systemFontOfSize:)];
-    [self swizzleClassMethod:@selector(boldSystemFontOfSize:) with:@selector(wd_boldSystemFontOfSize:)];
-    [self swizzleClassMethod:@selector(fontWithName:size:) with:@selector(wd_fontWithName:size:)];
-    [self swizzleClassMethod:@selector(italicSystemFontOfSize:) with:@selector(wd_italicSystemFontOfSize:)];
+    [self swizzleClassMethod:@selector(systemFontOfSize:)
+                        with:@selector(wd_systemFontOfSize:)];
+    
+    [self swizzleClassMethod:@selector(boldSystemFontOfSize:)
+                        with:@selector(wd_boldSystemFontOfSize:)];
+    
+    [self swizzleClassMethod:@selector(fontWithName:size:)
+                        with:@selector(wd_fontWithName:size:)];
+    
+    [self swizzleClassMethod:@selector(italicSystemFontOfSize:)
+                        with:@selector(wd_italicSystemFontOfSize:)];
+    
+    [self swizzleClassMethod:@selector(systemFontOfSize:weight:)
+                        with:@selector(wd_systemFontOfSize:weight:)];
 }
 
 + (UIFont *)wd_systemFontOfSize:(CGFloat)pxSize {
@@ -53,6 +62,12 @@
 // 字体名称 + 大小
 + (UIFont *)wd_fontWithName:(NSString *)fontFamilyName size:(CGFloat)pxSize {
     UIFont *font = [UIFont wd_fontWithName:fontFamilyName size:pxSize*[UIScreen mainScreen].bounds.size.width/375.0];
+    return font;
+}
+
+// 字体样式
++ (UIFont *)wd_systemFontOfSize:(CGFloat)pxSize weight:(UIFontWeight)weight {
+    UIFont *font = [UIFont wd_systemFontOfSize:pxSize*[UIScreen mainScreen].bounds.size.width/375.0 weight:(weight)];
     return font;
 }
 

@@ -11,6 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WDNavgationBar : UIView
+/**
+ * 标题文字
+ * 样式为字体17. 颜色为黑色
+ */
+@property (nonatomic, copy) NSString *titleText;
+
 /** 是否显示底部showImage */
 @property (nonatomic, assign) BOOL isShowBottomLine;
 /** 底部showImage */
@@ -27,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *rightSecondButton;
 
 /**
-   按钮点击事件
+ * 按钮点击事件
  */
 @property (nonatomic, copy) void (^ leftButtonBlock)(void);
 @property (nonatomic, copy) void (^ leftSecondButtonBlock)(void);

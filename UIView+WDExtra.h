@@ -1,37 +1,49 @@
 //
 //  UIView+WDExtra.h
-//  
+//  AFNetworking
 //
-//  Created by wudan on 2018/12/29.
+//  Created by wudan on 2019/6/1.
 //
 
-
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (WDExtra)
+/* The array of CGColorRef objects defining the color of each gradient
+ * stop. Defaults to nil. Animatable. */
 
-/** left: frame.origin.x */
-@property (nonatomic) CGFloat left;
-/** top: frame.origin.y */
-@property (nonatomic) CGFloat top;
-/** right: frame.origin.x + frame.size.width */
-@property (nonatomic) CGFloat right;
-/** bottom: frame.origin.y + frame.size.height */
-@property (nonatomic) CGFloat bottom;
-/** width: frame.size.width */
-@property (nonatomic) CGFloat width;
-/** height: frame.size.height */
-@property (nonatomic) CGFloat height;
-/** centerX: center.x */
-@property (nonatomic) CGFloat centerX;
-/** centerY: center.y */
-@property (nonatomic) CGFloat centerY;
-/** origin: frame.origin */
-@property (nonatomic) CGPoint origin;
-/** size: frame.size */
-@property (nonatomic) CGSize  size;
+@property (nullable, copy) NSArray *wd_colors;
 
+/* An optional array of NSNumber objects defining the location of each
+ * gradient stop as a value in the range [0,1]. The values must be
+ * monotonically increasing. If a nil array is given, the stops are
+ * assumed to spread uniformly across the [0,1] range. When rendered,
+ * the colors are mapped to the output colorspace before being
+ * interpolated. Defaults to nil. Animatable. */
+
+@property (nullable, copy) NSArray<NSNumber *> *wd_locations;
+
+/* The start and end points of the gradient when drawn into the layer's
+ * coordinate space. The start point corresponds to the first gradient
+ * stop, the end point to the last gradient stop. Both points are
+ * defined in a unit coordinate space that is then mapped to the
+ * layer's bounds rectangle when drawn. (I.e. [0,0] is the bottom-left
+ * corner of the layer, [1,1] is the top-right corner.) The default values
+ * are [.5,0] and [.5,1] respectively. Both are animatable. */
+
+@property CGPoint wd_startPoint;
+@property CGPoint wd_endPoint;
+
++ (UIView *_Nullable)wd_gradientViewWithColors:(NSArray<UIColor *> *_Nullable)colors
+                                     locations:(NSArray<NSNumber *> *_Nullable)locations
+                                    startPoint:(CGPoint)startPoint
+                                      endPoint:(CGPoint)endPoint;
+
+- (void)wd_setGradientBackgroundWithColors:(NSArray<UIColor *> *_Nullable)colors
+                                 locations:(NSArray<NSNumber *> *_Nullable)locations
+                                startPoint:(CGPoint)startPoint
+                                  endPoint:(CGPoint)endPoint;
 @end
 
 NS_ASSUME_NONNULL_END
