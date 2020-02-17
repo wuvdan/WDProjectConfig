@@ -15,7 +15,6 @@
 #import "UIViewController+WDNavgationBar.h"
 #import "UIViewController+WDTableView.h"
 #import "UIScrollView+WDNoData.h"
-#import "WDNetWorkingManager.h"
 #import "UINavigationController+WDStatusBar.h"
 
 #pragma mark - 字体、颜色相关
@@ -74,7 +73,12 @@
 
 #pragma mark - 屏幕坐标、尺寸相关
 // 判断是否iPhone X
-#define kIS_iPhoneX             (UIApplication.sharedApplication.statusBarFrame.size.height > 20)
+#define kIS_iPhoneX \
+({BOOL isPhoneX = NO;\
+if (@available(iOS 11.0, *)) {\
+isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
+}\
+(isPhoneX);})
 // 屏幕高度
 #define kScreenHeight           [[UIScreen mainScreen] bounds].size.height
 // 屏幕宽度
