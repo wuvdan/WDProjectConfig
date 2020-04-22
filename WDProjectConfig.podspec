@@ -10,14 +10,14 @@ Pod::Spec.new do |s|
 
 
   s.name         = "WDProjectConfig"
-  s.version      = "1.1.6"
+  s.version      = "2.0.0git"
   s.summary      = "iOS 项目搭建配置文件"
   s.description  = "为项目搭建提供简单的屏幕适配和其他简易使用的默认配置"
-  s.homepage     = "https://github.com/wudan-ios/WDProjectConfig"
+  s.homepage     = "https://github.com/wuvdan/WDProjectConfig"
   s.license      = "MIT"
   s.platform     = :ios,"9.0"
   s.author       = { "wudan" => "wudan_ios@163.com" }
-  s.source       = { :git => "https://github.com/wudan-ios/WDProjectConfig.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/wuvdan/WDProjectConfig.git", :tag => "#{s.version}" }
   s.source_files = "WDProjectConfig", "*.{h,m}"
   s.requires_arc = true
 end
