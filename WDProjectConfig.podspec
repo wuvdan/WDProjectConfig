@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "WDProjectConfig"
-  s.version      = "2.0.0git"
+  s.version      = "2.0.0"
   s.summary      = "iOS 项目搭建配置文件"
   s.description  = "为项目搭建提供简单的屏幕适配和其他简易使用的默认配置"
   s.homepage     = "https://github.com/wuvdan/WDProjectConfig"
