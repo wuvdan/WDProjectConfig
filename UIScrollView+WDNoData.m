@@ -94,7 +94,7 @@ void exchangeSelector(SEL sel1, SEL sel2, Class cls) {
     }
     
     if ( items == 0 ) {
-        [self.superview addSubview:self.noDataView];
+        [self addSubview:self.noDataView];
     } else {
         [self.noDataView removeFromSuperview];
     }

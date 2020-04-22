@@ -13,47 +13,74 @@
 #import "UIFont+WDExtra.h"
 #import "UIView+WDExtra.h"
 #import "UIViewController+WDNavgationBar.h"
-#import "UIViewController+WDTableView.h"
 #import "UIScrollView+WDNoData.h"
 #import "UINavigationController+WDStatusBar.h"
 
 #pragma mark - 字体、颜色相关
-#define kFONT_SIZE(f)            [UIFont systemFontOfSize:(f)]
-#define kFONT_BOLD_SIZE(f)       [UIFont boldSystemFontOfSize:(f)]
-#define kFONT_ITALIC_SIZE(f)     [UIFont italicSystemFontOfSize:(f)]
-#define kRGBCOLOR(r,g,b)         [UIColor colorWithRed:(r)/255.f green:(g)/255.f blue:(b)/255.f alpha:1.f]
-#define kRGBACOLOR(r,g,b,a)      [UIColor colorWithRed:(r)/255.f green:(g)/255.f blue:(b)/255.f alpha:(a)]
-#define kRandomColor             [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]
-#define kColorWithHex(rgbValue)  [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
+UIFont *kNormalFont(CGFloat size) {
+    return [UIFont systemFontOfSize:size];
+}
+
+UIFont *kNormalWFont(CGFloat size, UIFontWeight weight) {
+    return [UIFont systemFontOfSize:size weight:weight];
+}
+
+UIColor *kHexColor(NSInteger hex) {
+    return [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16)) / 255.0 green:((float)((hex & 0xFF00) >> 8)) / 255.0 blue:((float)(hex & 0xFF)) / 255.0 alpha:1];
+}
+
+UIColor *kHexAColor(NSInteger hex,CGFloat a) {
+    return [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16)) / 255.0 green:((float)((hex & 0xFF00) >> 8)) / 255.0 blue:((float)(hex & 0xFF)) / 255.0 alpha:a];
+}
+
+UIColor *kRGBColor(CGFloat r, CGFloat g, CGFloat b) {
+    return [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:1];
+}
+
+UIColor *kRGBAColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a) {
+    return [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:a];
+}
 ///=============================================================================
 
 #pragma mark - 图片加载
 // 加载图片
-#define kGetImage(imageName)                        [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
-// 读取本地图片 （文件名，后缀名）
-#define kGetBundleImage(__FILENAME__,__EXTENSION__) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:__FILENAME__ ofType:__EXTENSION__]]
+UIImage *kTemplateImage(NSString *named) {
+    return [[UIImage imageNamed:named] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
 ///=============================================================================
 
-#pragma mark - 控制台打印
-#ifdef DEBUG
-#define kLog(FORMAT, ...) fprintf(stderr,"%s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#if DEBUG
+
+#define NSLog(FORMAT, ...) fprintf(stderr,"%s line:%d content:%s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
 #else
+
 #define NSLog(FORMAT, ...) nil
+
 #endif
 ///=============================================================================
 
 #pragma mark - 判断数据是否为空
 // 字符串是否为空
-#define kISNullString(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO )
+BOOL kIsNullString(NSString *str) {
+    return ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO );
+}
 // 数组是否为空
-#define kISNullArray(array) (array == nil || [array isKindOfClass:[NSNull class]] || array.count == 0 ||[array isEqual:[NSNull null]])
+BOOL kIsNullArray(NSArray *array) {
+    return (array == nil || [array isKindOfClass:[NSNull class]] || array.count == 0 ||[array isEqual:[NSNull null]]);
+}
 // 字典是否为空
-#define kISNullDict(dic) (dic == nil || [dic isKindOfClass:[NSNull class]] || dic.allKeys == 0 || [dic isEqual:[NSNull null]])
+BOOL kIsNullDict(NSDictionary *dic) {
+    return (dic == nil || [dic isKindOfClass:[NSNull class]] || dic.allKeys == 0 || [dic isEqual:[NSNull null]]);
+}
 // 是否是空对象
-#define kISNullObject(_object) (_object == nil \
-|| [_object isKindOfClass:[NSNull class]] \
-|| ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
-|| ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
+BOOL kIsNullObject(id obj) {
+    return obj == nil
+    || [obj isKindOfClass:[NSNull class]]
+    || ([obj respondsToSelector:@selector(length)] && [(NSData *)obj length] == 0)
+    || ([obj respondsToSelector:@selector(count)] && [(NSArray *)obj count] == 0);
+}
 ///=============================================================================
 
 #pragma mark - Application相关
@@ -79,6 +106,10 @@ if (@available(iOS 11.0, *)) {\
 isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
 }\
 (isPhoneX);})
+
+// 判断是否Plus系列
+#define kIS_iPhonePlus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) || CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size)) : NO)
+
 // 屏幕高度
 #define kScreenHeight           [[UIScreen mainScreen] bounds].size.height
 // 屏幕宽度
@@ -95,13 +126,14 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define kTabbarHeight           49.f
 
 // 控件尺寸比例
-#define kScreenWidthRate        ([[UIScreen mainScreen] bounds].size.width/375.f)
-// 实际宽尺寸
-#define kSuitWidthSize(size)    kScreenWidthRate * (size)
+CGFloat kSuitWidthSize(CGFloat value) {
+    return ([[UIScreen mainScreen] bounds].size.width / 375.f) * value;
+}
+
 // 控件尺寸比例
-#define kScreenHeightRate       ([[UIScreen mainScreen] bounds].size.height/667.f)
-// 实际高尺寸
-#define kSuitHeightSize(size)   kScreenHeightRate * (size)
+CGFloat kSuitHeightSize(CGFloat value) {
+    return ([[UIScreen mainScreen] bounds].size.height / 667.f) * value;
+}
 ///=============================================================================
 
 #pragma mark - 强弱引用

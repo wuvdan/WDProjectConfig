@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIStatusBarStyle)preferredStatusBarStyle;
 
+- (BOOL)prefersStatusBarHidden;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -29,11 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
    按钮点击事件
  */
-@property (nonatomic, copy) void (^ leftButtonBlock)(void);
-@property (nonatomic, copy) void (^ leftSecondButtonBlock)(void);
-@property (nonatomic, copy) void (^ centerButtonBlock)(void);
-@property (nonatomic, copy) void (^ rightButtonBlock)(void);
-@property (nonatomic, copy) void (^ rightSecondButtonBlock)(void);
+@property (nonatomic, copy) void (^leftButtonBlock)(void);
+@property (nonatomic, copy) void (^leftSecondButtonBlock)(void);
+@property (nonatomic, copy) void (^centerButtonBlock)(void);
+@property (nonatomic, copy) void (^rightButtonBlock)(void);
+@property (nonatomic, copy) void (^rightSecondButtonBlock)(void);
 
 @end
 
