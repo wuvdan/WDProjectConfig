@@ -106,5 +106,70 @@
     self.frame = frame;
 }
 
+#pragma mark - 字体、颜色相关
+UIFont *kNormalFont(CGFloat size) {
+    return [UIFont systemFontOfSize:size];
+}
+
+UIFont *kNormalWFont(CGFloat size, UIFontWeight weight) {
+    return [UIFont systemFontOfSize:size weight:weight];
+}
+
+UIColor *kHexColor(NSInteger hex) {
+    return [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16)) / 255.0 green:((float)((hex & 0xFF00) >> 8)) / 255.0 blue:((float)(hex & 0xFF)) / 255.0 alpha:1];
+}
+
+UIColor *kHexAColor(NSInteger hex,CGFloat a) {
+    return [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16)) / 255.0 green:((float)((hex & 0xFF00) >> 8)) / 255.0 blue:((float)(hex & 0xFF)) / 255.0 alpha:a];
+}
+
+UIColor *kRGBColor(CGFloat r, CGFloat g, CGFloat b) {
+    return [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:1];
+}
+
+UIColor *kRGBAColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a) {
+    return [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:a];
+}
+///=============================================================================
+
+#pragma mark - 图片加载
+// 加载图片
+UIImage *kTemplateImage(NSString *named) {
+    return [[UIImage imageNamed:named] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
+///=============================================================================
+#pragma mark - 判断数据是否为空
+// 字符串是否为空
+BOOL kIsNullString(NSString *str) {
+    return ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO );
+}
+// 数组是否为空
+BOOL kIsNullArray(NSArray *array) {
+    return (array == nil || [array isKindOfClass:[NSNull class]] || array.count == 0 ||[array isEqual:[NSNull null]]);
+}
+// 字典是否为空
+BOOL kIsNullDict(NSDictionary *dic) {
+    return (dic == nil || [dic isKindOfClass:[NSNull class]] || dic.allKeys == 0 || [dic isEqual:[NSNull null]]);
+}
+// 是否是空对象
+BOOL kIsNullObject(id obj) {
+    return obj == nil
+    || [obj isKindOfClass:[NSNull class]]
+    || ([obj respondsToSelector:@selector(length)] && [(NSData *)obj length] == 0)
+    || ([obj respondsToSelector:@selector(count)] && [(NSArray *)obj count] == 0);
+}
+///=============================================================================
+
+//// 控件尺寸比例
+CGFloat kSuitWidthSize(CGFloat value) {
+    return ([[UIScreen mainScreen] bounds].size.width / 375.f) * value;
+}
+
+// 控件尺寸比例
+CGFloat kSuitHeightSize(CGFloat value) {
+    return ([[UIScreen mainScreen] bounds].size.height / 667.f) * value;
+}
+///=============================================================================
 
 @end
